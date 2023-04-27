@@ -10,7 +10,7 @@ const addMovie = (e) => {
     movieTitle.addEventListener("click", crossOffMovie)
     movie.appendChild(movieTitle)
     let deleteBtn = document.createElement("button")
-    deleteBtn.innerHTML = "X"
+    deleteBtn.textContent = "X"
     deleteBtn.addEventListener("click", deleteMovie)
     movie.appendChild(deleteBtn)
     let listElement = document.querySelector("ul")
@@ -22,27 +22,31 @@ let formElement = document.querySelector("form")
 formElement.addEventListener("submit", addMovie)
 
 const deleteMovie = (e) => {
+  let deleteText = ""
     e.target.parentNode.remove()
-    message.textContent = "Movie Deleted!"
-    //message.textContent = e.target.parentNode.previousElementSibling.innerHTML
-   // revealMessage()
+    //message.textContent = "Movie Deleted!"
+    deleteText = e.target.parentNode.textContent + " deleted"
+    revealMessage(deleteText)
 }
 
 const crossOffMovie = (e) => {
    // let checkedClass = document.querySelector(".checked")
+   let messageText = ""
   e.target.classList.toggle("checked")
   if(e.target.classList.contains("checked") === true) {
-    message.textContent = "Movie Watched"
-    //message.textContent = e.target.textContent + " watched"
+   // message.textContent = "Movie Watched"
+    messageText = e.target.textContent + " watched"
   } else {
-    message.textContent = "Movie added Back"
+   // message.textContent = "Movie added Back"
+    messageText = e.target.textContent + " added back"
   }
-//revealMessage()
+revealMessage(messageText)
 }
 
-// const revealMessage = (e) => {
-//     setTimeout(() => {
-//        e.target.classList.toggle("hide")
-
-//     }, 1000)
-// }
+const revealMessage = (messageText) => {
+message.classList.remove("hide")
+ message.textContent = messageText
+    setTimeout(() => {
+    message.classList.add("hide")
+    }, 1000)
+}
